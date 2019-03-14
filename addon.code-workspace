@@ -1,0 +1,24 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "blender.addon.reloadOnSave": true,
+        "python.linting.pylintEnabled": true,
+        "editor.tabSize": 4,
+        "editor.wordWrap": "off",
+        "editor.wordWrapColumn": 200,
+        "python.formatting.autopep8Args": [
+            "--max-line-length=200"
+        ]
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-vscode.go",
+            "ms-python.python",
+            "jacqueslucke.blender-development"
+        ]
+    }
+}
