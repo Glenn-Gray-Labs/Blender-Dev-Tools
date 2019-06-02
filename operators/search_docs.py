@@ -1,12 +1,13 @@
 import bpy
+from bpy.types import Operator, Event, UILayout, Context
+from bpy.props import StringProperty, EnumProperty
 
-
-class SearchDocs(bpy.types.Operator):
+class SearchDocs(Operator):
     bl_idname = "modulum.search_docs"
     bl_label = "Search 2.8 API Docs"
     bl_description = "Open and search Blender 2.8's API documentation in a new browser window or tab"
 
-    section: bpy.props.EnumProperty(
+    section: EnumProperty(
         name="Section",
         description="The section or subject that will be opened",
         items=[
@@ -20,11 +21,11 @@ class SearchDocs(bpy.types.Operator):
             ("UTILS", "Utilities", "bpy.utils"),
         ])
 
-    query: bpy.props.StringProperty(
+    query: StringProperty(
         name="Query",
         description="The search query that will be made.  If blank, then the home page for the docs will be shown")
 
-    def execute(self, context):
+    def execute(self, context: Context):
         url = "https://docs.blender.org/api/blender2.8"
 
         if self.section == "SEARCH":
@@ -35,11 +36,11 @@ class SearchDocs(bpy.types.Operator):
         bpy.ops.wm.url_open(url=url)
         return {"FINISHED"}
 
-    def invoke(self, context, event):
+    def invoke(self, context: Context, event: Event):
         return context.window_manager.invoke_props_dialog(self)
 
-    def draw(self, context):
-        layout = self.layout
+    def draw(self, context: Context):
+        layout: UILayout = self.layout
         layout.prop(self, "section")
         if self.section == "SEARCH":
             layout.prop(self, "query")
